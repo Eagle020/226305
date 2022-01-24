@@ -1,135 +1,99 @@
-# Datensatz Semesterverbund CRPR2 #
-Codebuch Stand 2021-05, aktualisiert 2021-10
-erstellt von Swaran Sandhu (sandhu@hdm-stuttgart.de)
+# Datensatz Desiderius Erasmus Stiftung #
+Codebuch Stand 24.01.2022
 
 ## Inhalt
 - Edges.csv (Edgelist)
 - Nodes.csv (Nodelist)
 - Codebuch.md (Codierung der Datensätze)
 
-## Ursprung und Datenerhebung
-Ich habe den Datensatz unter den Studierenden des dritten Semesters im Kurs Netzwerkanalyse erhoben. Die Daten sind nach der Erhebung nach einem Zufallsprinzip anonymisiert worden.
+## EDGE-Attribute
 
-Das Netzwerk ist ein *gerichtetes one-mode Akteursnetzwerk*. Es wurden zwei getrennte Fragen erhoben:
+** id** 
+eindeutige Codierung des Knoten für jeweils einen Akteur (Person oder Organisation)
 
-**Projektarbeitsnetzwerk work**  
-1a) Bei Hochschulprojekten arbeite ich am liebsten mit folgender Person aus meinem Semester: Bitte tragen Sie das Kürzel der Person ein.  
-1b) Bei Hochschulprojekten arbeite ich am auch gerne mit folgender Person aus meinem Semester: Bitte tragen Sie das Kürzel der zweiten Person ein.  
-  
-Für das Zusammenarbeitsnetzwerk *work* wurde der Person, die zuerst genannt wurde, ein Gewicht von 3 vergeben, die zweite Person erhielt ein Gewicht von 1. Insgesamt waren 76 Beziehungsmuster möglich.  
+** relation** 
+Art der Beziehung
+1 = mit Verantwortung
+2 = Mitglied, involviert
+3 = Unterstützung
+4 = Erwähnung
 
-**Unterstützungsnetzwerk help**  
-2a) Wenn Sie ein Problem oder eine studiengangsbezogene Frage haben, an welchen ihrer Mitstudenten aus ihrem Semester wenden Sie sich zuerst?  Bitte tragen Sie auch hier wieder das Kürzel ein.  
-2b) Wenn Sie ein Problem oder eine studiengangsbezogene Frage haben, an welchen ihrer Mitstudenten aus ihrem Semester wenden Sie sich als nächstes? Bitte tragen Sie auch hier wieder das Kürzel ein.
-  
-Für das Unterstützungsnetzwerk *help* wurde der Person, die zuerst genannt wurde, ein Gewicht von 3 vergeben, die zweite Person erhielt ein Gewicht von 1. Insgesamt waren 76 Beziehungsmuster möglich.
-  
-**Beziehungsnetzwerk love**
-Das Edge-Attribut *complicated* beschreibt drei unterschiedliche Beziehungsmuster innerhalb der Gruppe. Diese Kriterien haben kein eigenes Gewicht, sondern sind über die Art der Beziehung definiert (reziproke Paarbeziehung, tinder-Aktivität, einseitige Beziehung).
+** entry** 
+Datum des Eintritts
 
-**Umgang mit fehlgenden Werten**
-Fehlende Werte werden nicht erfasst.
+## NODE-Attribute
+** type** 
+handelt es sich um einen Person oder eine Organisation?
+1 = Organisation
+2 = Person
 
-# EDGE-Attribute
-
-**id**  
-(eindeutige Codierung des Knoten)   
-codiert von 1 bis 38, jede ID entspricht einem Studenten
-
-**from**
-initiierender Knoten, in diesem Fall: Student/in fragt um Rat oder zeigt präferierte Zusammenarbeit
-
-**to**
-erhaltender Knoten, in diesem Fall: Student/in wird um Rat gefragt oder für Zusammenarbeit präferiert
-
-**weight**  
-Beziehungsstärke aufgrund der Nennung in den Fragen)  
-3 = sehr starke Beziehung (erste Nennung),   
-1 = starke Beziehung vorhanden (zweite Nennung)
-
-**relation**
-Beziehungsart zwischen den Personen  
-1 = *work* Projektbasierte Beziehung: Bei einem gerichteten Netzwerk präferiert der Sender (erste Spalte) die Zusammenarbeit mit der genannten Zielperson (zweite Spalte).  
-2 = *help* Unterstützungsbeziehung: Bei einem gerichteten Netzwerk fragt der Sender (erste Spalte) die genannte Person (zweite Spalte) um Rat.  
-3 = *love* Liebesbeziehung zwischen Akteuren, codiert nach dem Attribut *complicated*
-
-**complicated**  
-1 = Beziehung (typische Paarbeziehung, d.h. reziprok zwischen beiden PartnerInnen),      
-2 = Tinder-Like (hat die person rechts geswiped, muss aber nicht gegenseitig sein)     
-3 = Crush (einseitig verliebt, ohne dass die Person etwas davon weiss).  
-
-
-# NODE-Attribute  
-  
-**id**  
-Identische ID wie aus der edgelist zur Identifikation der Knoten. In diesem Fall sind alle personenbezogenen Daten anonymisiert von 1 bis 38.
-
-**name**
-numerische ID
-
-**name_first**
-Vorname abgekürzt, z.B. für Visualiserung, falls der Name zu lange ist
-
-**sex**    
-Bitte geben Sie ihr Geschlecht an:  
-1 = weiblich  
-2 = männlich  
+** sex** 
+Geschlecht der Personen
+1 = weiblich
+2 = männlich
 3 = divers
-  
-**crpr***    
-Welche Studienrichtung haben Sie vertieft?  
-1 = CR  
-2 = PR
 
-**height**  
-Größe in cm   
+** afd** 
+atkuell Mitgliedschaft von Personen in der Partei Alternative für Deutschland
+1 = Ja
+2 = Nein
+3= Ehemalig
 
-**weight**  
-Gewicht in kg  
+** age** 
+Alter der Personen
+1 = bis 40
+2 = 41 bis 50 Jahre
+3 = 51 bis 60 Jahre
+4 = 60 und älter
 
-**age_real**   
-Alter in natürlichen Zahlen.  
+** name** 
+voller Name, ausgeschrieben, ohne Titel
 
-**age**   
-Bitte geben Sie Ihr Alter an:  
-1 = bis 20 Jahre    
-2 = 21 bis 22 Jahre    
-3 = 23 bis 24 Jahre  
-4 = 25 und älter  
+** region** 
+1 = West
+2 = Ost
+** 
+education** 
+Bildungsstand
+1 = Abitur
+2 = Bachelor
+3 = Master
+4 = Doktor
+5 = Professor 
 
-**smoke**    
-Rauchen Sie mindestens ein Mal pro Woche?  
-1 = nein   
-2 = ja  
-  
-**tatoo**    
-Tatoo vorhanden?   
-1 = nein  
-2 = ja  
+** subject**  
+Fachrichtung der Bildung
+1 = Wirtschaft
+2 = Jura
+3 = Sozialwissenschaften
+4 = Naturwissenschaften
+5 = Technik
 
-**phone**  
-1 = android  
-2 = iOS/iphone  
-  
-**eyes**    
-Welche Augenfarbe?    
-1 = grün,   
-2 = blau,   
-3 = braun,   
-4 = blau.     
+** law_conflict** 
+stand die Person/Organisation im Konfilt mit dem Gesetz
+1 = Nein
+2 = Verklagt wegen rechter Einstellung
+3 = Beobachtung durch den Verfassungsschutz
 
-**hair**  
-Welche Haarfarbe?  
-1 = braun,      
-2 = schwarz,   
-3 = blond,    
-4 = rot.    
+** holocaust** 
+1 = leugnet den Holocaust
+2 = spielt den Holocaust runter
+3 = Erkennt den Holocaust an
 
-**location** 
-Wohnort, als string/characters codiert  
-
-**county**  
-Bundesland, als string/characters codiert  
-
-
-##
+** Bundesland** 
+1 = Baden-Württemberg
+2 = Bayern
+3 = Berlin
+4 = Brandenburg
+5 = Bremen
+6 = Hamburg
+7 = Hessen
+8 = Mecklenburg-Vorpommern
+9 = Niedersachsen
+10 = Nordrhein-Westfalen
+11 = Rheinland-Pfalz
+12 = Saarland
+13 = Sachsen
+14 = Sachsen-Anhalt
+15 = Schleswig-Holstein
+16 = Thüringen
